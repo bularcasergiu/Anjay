@@ -145,7 +145,7 @@ function(add_coap_library)
 
     set(name ${add_coap_library_NAME})
     set(private_definitions ${add_coap_library_PRIVATE_DEFINITIONS})
-    add_library(${name} STATIC ${SOURCES})
+    add_library(${name} SHARED ${SOURCES})
 
     target_include_directories(${name} PRIVATE src)
     target_include_directories(${name} PUBLIC

@@ -262,7 +262,7 @@ cmake_dependent_option(WITH_MODULE_fw_update "Firmware Update object module" ON 
 
 ################# CODE #########################################################
 
-add_library(anjay
+add_library(anjay SHARED
             src/core/anjay_access_utils.c
             src/core/anjay_bootstrap_core.c
             src/core/anjay_core.c
