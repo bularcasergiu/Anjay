@@ -13,23 +13,22 @@ class SebuConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = {"shared": True}
     generators = "cmake"
+    exports_sources = "*", ".git"
+    no_copy_source=True
 
+    def source(self):
+        self.run("cmake . -DDTLS_BACKEND=""")
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="/home/sebu/workspace/Anjay", build_folder="/home/sebu/workspace/Anjay")
+        cmake.configure(source_folder=self.source_folder, build_folder=self.source_folder)
         cmake.build()
 
-        # Explicit way:
-        # self.run('cmake %s/hello %s'
-        #          % (self.source_folder, cmake.command_line))
-        # self.run("cmake --build . %s" % cmake.build_config)
-
     def package(self):
-        self.copy("*.h", dst="include", src="/home/sebu/workspace/Anjay/include_public")
-        self.copy("*.so*", dst="lib", src="/home/sebu/workspace/Anjay/output/lib")
-        self.copy("*.cmake", dst="cmake", src="/home/sebu/workspace/Anjay/output/cmake")
-        self.copy("*", dst="bin", src="/home/sebu/workspace/Anjay/output/bin")
+        self.copy("*.h", dst="include", src="include_public")
+        self.copy("*.so*", dst="lib", src="output/lib")
+        self.copy("*.cmake", dst="cmake", src="output/cmake")
+        self.copy("*", dst="bin", src="output/bin")
 
     def package_info(self):
         self.cpp_info.libs = ["anjay"]
