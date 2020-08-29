@@ -13,7 +13,7 @@ class SebuConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = {"shared": True}
     generators = "cmake"
-    exports_sources = "*", ".git"
+    exports_sources = "*", "!output"
     no_copy_source=True
 
     def source(self):
